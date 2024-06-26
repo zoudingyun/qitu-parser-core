@@ -6,12 +6,64 @@
 
     <groupId>org.qitu.parser</groupId>
     <artifactId>qitu-parser-core</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1</version>
+
+    <!--开源信息-->
+    <!--问题提交处-->
+    <issueManagement>
+        <system>Github Issue</system>
+        <url>https://github.com/zoudingyun/qitu-parser-core/issues</url>
+    </issueManagement>
+
+    <developers>
+        <developer>
+            <name>Zou Dingyun</name>
+            <email>zoudingyun@foxmail.com</email>
+        </developer>
+    </developers>
+
+    <!--源代码管理-->
+    <scm>
+        <connection>scm:git:https://github.com/zoudingyun/qitu-parser-core.git</connection>
+        <developerConnection>scm:git:https://github.com/zoudingyun/qitu-parser-core.git</developerConnection>
+        <url>https://github.com/zoudingyun/qitu-parser-core</url>
+    </scm>
+
+    <!--授权-->
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--单元测试-->
+        <junit.version>5.10.2</junit.version>
+        <!--测试覆盖度-->
+        <jacoco.version>0.8.12</jacoco.version>
     </properties>
+
+
+    <dependencies>
+        <!-- 单元测试 -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 </project>
