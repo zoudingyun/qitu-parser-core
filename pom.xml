@@ -9,6 +9,11 @@
     <version>0.0.1</version>
 
     <!--开源信息-->
+    <!--项目描述-->
+    <description>QiTu解析器核心组件</description>
+    <!--项目地址-->
+    <url>https://github.com/zoudingyun/qitu-parser-core</url>
+
     <!--问题提交处-->
     <issueManagement>
         <system>Github Issue</system>

@@ -36,13 +36,6 @@ public class Base16Codec implements Encoder<byte[], char[]>, Decoder<CharSequenc
     /**
      * 编码
      *
-     * <br><br>
-     * 步骤：<br>
-     * 1.初始化输出数组 <br>
-     * 2.高位部分通过 (0xF0 & data[i]) >>> 4 获得。这里用掩码 0xF0（1111 0000）取出高4位，再右移4位，使其位于低4位。<br>
-     * 3.低位部分通过 0x0F & data[i] 获得。这里用掩码 0x0F（0000 1111）取出低4位。<br>
-     * 4.对应的十六进制字符通过 alphabets 数组查找。<br>
-     *
      * @param data 需要编码的数据
      * @return 编码后的数据
      */
