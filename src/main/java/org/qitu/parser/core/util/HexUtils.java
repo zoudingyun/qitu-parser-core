@@ -1,17 +1,17 @@
 package org.qitu.parser.core.util;
 
-import org.qitu.parser.core.codec.impl.Base16Codec;
+import cn.hutool.core.util.HexUtil;
+import cn.hutool.core.util.StrUtil;
 import org.qitu.parser.core.exceptions.ParserException;
-import org.qitu.parser.core.text.util.StrUtils;
+import org.qitu.parser.core.exceptions.hex.HexFormatException;
 
-import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 /**
  * 十六进制 工具类
  * <p>
- * 来自hutool
+ * 部分方法来自hutool
  * @author zoudingyun
  * @since 2024/6/26 17:09
  */
@@ -26,21 +26,32 @@ public class HexUtils {
      * @return 是否为16进制
      */
     public static boolean isHexNumber(String value) {
-        if(StrUtils.startWith(value, '-')){
-            return false;
+        return HexUtil.isHexNumber(value);
+    }
+
+    /**
+     * 判断给定字符串是否为16进制数<br>
+     * 如果是，需要使用对应数字类型对象的{@code decode}方法解码<br>
+     * 例如：{@code Integer.decode}方法解码int类型的16进制数字
+     *
+     * @param value 值
+     * @return 是否为16进制
+     */
+    public static String formatHexStr(String value) {
+        if (value == null || value.isEmpty()) {
+            throw new HexFormatException("The hex string cannot be empty");
         }
-        int index = 0;
-        if (value.startsWith("0x", index) || value.startsWith("0X", index)) {
-            index += 2;
-        } else if (value.startsWith("#", index)) {
-            index ++;
+        // 替换空白字符
+        value = StrUtil.cleanBlank(value);
+        if (isHexNumber(value)) {
+            if (value.length()%2 == 0) {
+                return value;
+            }else {
+                throw new HexFormatException(String.format("\"%s\". The effective character length of this string is odd , but the length of the hex string must be even",value));
+            }
+        }else {
+            throw new HexFormatException(String.format("\"%s\" is not a standard hex string",value));
         }
-        try {
-            new BigInteger(value.substring(index), 16);
-        } catch (final NumberFormatException e) {
-            return false;
-        }
-        return true;
     }
 
 
@@ -63,7 +74,7 @@ public class HexUtils {
      * @return 十六进制char[]
      */
     public static char[] encodeHex(String str, Charset charset) {
-        return encodeHex(StrUtils.bytes(str, charset), true);
+        return HexUtil.encodeHex(str,charset);
     }
 
     /**
@@ -74,7 +85,7 @@ public class HexUtils {
      * @return 十六进制char[]
      */
     public static char[] encodeHex(byte[] data, boolean toLowerCase) {
-        return (toLowerCase ? Base16Codec.CODEC_LOWER : Base16Codec.CODEC_UPPER).encode(data);
+        return HexUtil.encodeHex(data,toLowerCase);
     }
 
     /**
@@ -84,7 +95,7 @@ public class HexUtils {
      * @return 十六进制String
      */
     public static String encodeHexStr(byte[] data) {
-        return encodeHexStr(data, true);
+        return HexUtil.encodeHexStr(data);
     }
 
     /**
@@ -95,7 +106,7 @@ public class HexUtils {
      * @return 十六进制String
      */
     public static String encodeHexStr(String data, Charset charset) {
-        return encodeHexStr(StrUtils.bytes(data, charset), true);
+        return HexUtil.encodeHexStr(data, charset);
     }
 
     /**
@@ -105,7 +116,7 @@ public class HexUtils {
      * @return 十六进制String
      */
     public static String encodeHexStr(String data) {
-        return encodeHexStr(data, StandardCharsets.UTF_8);
+        return HexUtil.encodeHexStr(data);
     }
 
     /**
@@ -116,7 +127,7 @@ public class HexUtils {
      * @return 十六进制String
      */
     public static String encodeHexStr(byte[] data, boolean toLowerCase) {
-        return new String(encodeHex(data, toLowerCase));
+        return HexUtil.encodeHexStr(data, toLowerCase);
     }
 
 
@@ -128,7 +139,7 @@ public class HexUtils {
      * @return 字符串
      */
     public static String decodeHexStr(String hexStr) {
-        return decodeHexStr(hexStr, StandardCharsets.UTF_8);
+        return HexUtil.decodeHexStr(hexStr, StandardCharsets.UTF_8);
     }
 
     /**
@@ -139,10 +150,7 @@ public class HexUtils {
      * @return 字符串
      */
     public static String decodeHexStr(String hexStr, Charset charset) {
-        if (StrUtils.isEmpty(hexStr)) {
-            return hexStr;
-        }
-        return StrUtils.toStr(decodeHex(hexStr), charset);
+        return HexUtil.decodeHexStr(hexStr, charset);
     }
 
     /**
@@ -153,7 +161,7 @@ public class HexUtils {
      * @return 字符串
      */
     public static String decodeHexStr(char[] hexData, Charset charset) {
-        return StrUtils.toStr(decodeHex(hexData), charset);
+        return HexUtil.decodeHexStr(hexData, charset);
     }
 
     /**
@@ -163,7 +171,7 @@ public class HexUtils {
      * @return byte[]
      */
     public static byte[] decodeHex(String hexStr) {
-        return decodeHex((CharSequence) hexStr);
+        return HexUtil.decodeHex(hexStr);
     }
 
     /**
@@ -174,7 +182,7 @@ public class HexUtils {
      * @throws RuntimeException 如果源十六进制字符数组是一个奇怪的长度，将抛出运行时异常
      */
     public static byte[] decodeHex(char[] hexData) {
-        return decodeHex(String.valueOf(hexData));
+        return HexUtil.decodeHex(hexData);
     }
 
     /**
@@ -186,7 +194,7 @@ public class HexUtils {
      * @since 5.6.6
      */
     public static byte[] decodeHex(CharSequence hexData) {
-        return Base16Codec.CODEC_LOWER.decode(hexData);
+        return HexUtil.decodeHex(hexData);
     }
 
 

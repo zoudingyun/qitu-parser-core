@@ -1,11 +1,10 @@
 package org.qitu.parser.core.exceptions.util;
 
-import org.qitu.parser.core.text.util.StrUtils;
+import cn.hutool.core.exceptions.ExceptionUtil;
 
 /**
  * 异常工具类
- * <p>
- * 来源：hutool
+ *
  * @author zoudingyun
  * @since 2024/6/26 16:02
  */
@@ -18,10 +17,7 @@ public class ExceptionUtils {
      * @return 完整消息
      */
     public static String getMessage(Throwable e) {
-        if (null == e) {
-            return StrUtils.NULL;
-        }
-        return StrUtils.format("{}: {}", e.getClass().getSimpleName(), e.getMessage());
+        return ExceptionUtil.getMessage(e);
     }
 
 }

@@ -1,7 +1,7 @@
 package org.qitu.parser.core.exceptions;
 
+import cn.hutool.core.util.StrUtil;
 import org.qitu.parser.core.exceptions.util.ExceptionUtils;
-import org.qitu.parser.core.text.util.StrUtils;
 
 /**
  * 解析器通用异常
@@ -21,7 +21,7 @@ public class ParserException extends RuntimeException{
     }
 
     public ParserException(String messageTemplate, Object... params) {
-        super(StrUtils.format(messageTemplate, params));
+        super(StrUtil.format(messageTemplate, params));
     }
 
     public ParserException(String message, Throwable throwable) {
@@ -33,7 +33,7 @@ public class ParserException extends RuntimeException{
     }
 
     public ParserException(Throwable throwable, String messageTemplate, Object... params) {
-        super(StrUtils.format(messageTemplate, params), throwable);
+        super(StrUtil.format(messageTemplate, params), throwable);
     }
 
 }

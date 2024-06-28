@@ -52,10 +52,20 @@
         <junit.version>5.10.2</junit.version>
         <!--测试覆盖度-->
         <jacoco.version>0.8.12</jacoco.version>
+        <!--HuTool-core-->
+        <hutool.version>5.8.28</hutool.version>
     </properties>
 
 
     <dependencies>
+
+        <!--HuTool-core-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-core</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+
         <!-- 单元测试 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
