@@ -10,6 +10,8 @@ import cn.hutool.core.exceptions.ExceptionUtil;
  */
 public class ExceptionUtils {
 
+    private ExceptionUtils() {}
+
     /**
      * 获得完整消息，包括异常名，消息格式为：{SimpleClassName}: {ThrowableMessage}
      *

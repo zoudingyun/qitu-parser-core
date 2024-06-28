@@ -17,6 +17,8 @@ import java.nio.charset.StandardCharsets;
  */
 public class HexUtils {
 
+    private HexUtils(){}
+
     /**
      * 判断给定字符串是否为16进制数<br>
      * 如果是，需要使用对应数字类型对象的{@code decode}方法解码<br>
