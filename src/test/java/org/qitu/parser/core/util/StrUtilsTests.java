@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class StrUtilsTests {
 
     @Test
-    public void testEncode() {
+    public void testStrUtils() {
 
         // check hex
         assertTrue(StrUtils.isBlank(""));
@@ -21,6 +21,17 @@ public class StrUtilsTests {
         assertTrue(StrUtils.isBlank("\t\n\r"));
         assertFalse(StrUtils.isBlank("abc"));
         assertFalse(StrUtils.isBlank("a "));
+
+        assertEquals(StrUtils.trim("abc"),"abc");
+        assertEquals(StrUtils.trim("ab c"),"ab c");
+        assertEquals(StrUtils.trim(" abc"),"abc");
+        assertEquals(StrUtils.trim("abc "),"abc");
+        assertEquals(StrUtils.trim(" abc "),"abc");
+        assertEquals(StrUtils.trim(" abc"),"abc");
+        assertEquals(StrUtils.trim("abc "),"abc");
+        assertEquals(StrUtils.trim(" abc "),"abc");
+        assertEquals(StrUtils.trim("\t\nabc\r"),"abc");
+
     }
 
 

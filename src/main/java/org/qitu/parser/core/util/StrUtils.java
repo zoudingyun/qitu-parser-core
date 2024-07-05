@@ -19,4 +19,11 @@ public class StrUtils {
         return StrUtil.isBlankIfStr(string);
     }
 
+    /**
+     * 去除首尾空白字符
+     * */
+    public static String trim(String string) {
+        return StrUtil.trim(string);
+    }
+
 }
