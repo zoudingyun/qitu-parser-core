@@ -6,7 +6,7 @@
 
     <groupId>org.qitu.parser</groupId>
     <artifactId>qitu-parser-core</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2</version>
 
     <!--开源信息-->
     <!--项目描述-->
